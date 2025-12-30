@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Real-Time Chat App</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Global UI polish -->
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+        background: linear-gradient(135deg, #f4f6f8, #eef2ff);
+        color: #1f2937;
+      }
+
+      #root {
+        height: 100%;
+      }
+
+      button {
+        cursor: pointer;
+        border: none;
+        border-radius: 6px;
+        background-color: #2563eb;
+        color: #ffffff;
+        padding: 8px 14px;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+      }
+
+      button:hover {
+        background-color: #1e40af;
+      }
+
+      input {
+        width: 100%;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        padding: 8px;
+        outline: none;
+        font-size: 14px;
+      }
+
+      input:focus {
+        border-color: #2563eb;
+      }
+
+      a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* Small mobile improvement */
+      @media (max-width: 600px) {
+        body {
+          background: #f4f6f8;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
