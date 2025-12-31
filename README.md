@@ -122,8 +122,9 @@ JWT_SECRET=your_secret_key
 
 🔐 Login / Register
 <p align="center">
-  <img src="screenshots/Screenshot%202025-12-31%20200216.png" width="800"/>
+  <img src="screenshots/Screenshot%202025-12-31%20210255.png" width="800"/>
 </p>
+
 
 🌍 Public Room Chat (Multiple Users)
 <p align="center">
