@@ -96,7 +96,7 @@ JWT_SECRET=your_secret_key
 ---
 
 ## 📂 Project Structure
-<prep>
+<pre>
 root/
 ├── client/              # Frontend (React + Bootstrap)
 │   ├── src/
@@ -114,7 +114,7 @@ root/
 ├── screenshots/
 ├── .env.example
 └── README.md
-</prep>
+</pre>
 ---
 
 ## 🖥️ Screenshots / Demo
