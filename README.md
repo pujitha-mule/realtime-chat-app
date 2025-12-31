@@ -1,38 +1,65 @@
-Real-Time Chat Application (MERN Stack)
-📌 Overview
+🗨️ Real-Time Chat Application (MERN + WebSockets)
 
-This project is a real-time chat application built using the MERN stack with WebSockets (Socket.IO).
-It enables authenticated users to communicate instantly in chat rooms with messages persisted in a MongoDB database, similar to real-world applications like Slack or WhatsApp.
+A full-stack real-time chat application built using the MERN stack (MongoDB, Express.js, React, Node.js) and Socket.IO.
+The project focuses on real-time communication, room-based collaboration, authentication, and persistent chat history, inspired by applications like Slack and WhatsApp.
 
-The application focuses on real-time communication, secure authentication, and message persistence.
+🚀 Features
+🔐 Authentication & Security
 
-🚀 Key Features
+JWT-based user authentication
 
-User Authentication (Register & Login using JWT)
+Secure login and logout flow
 
-Real-time messaging using WebSockets (Socket.IO)
+Protected routes for authenticated users
 
-Chat rooms support
+🏠 Room & Chat Management
 
-Persistent chat history stored in MongoDB
+Public chat rooms (joinable by all users)
 
-Protected APIs using authentication middleware
+Private chat rooms with 6-character invite codes
 
-Responsive and simple UI
+Create public or private rooms
 
-Clean separation of frontend and backend
+Role-based room ownership (admin/member)
 
-🛠 Tech Stack
+Direct messaging between users
 
+💬 Real-Time Communication
+
+Real-time messaging using Socket.IO
+
+System messages (e.g., “User joined the room”)
+
+Multi-user chat support
+
+Live room updates without page refresh
+
+📨 Messaging & Media
+
+Text messaging
+
+Image and file sharing
+
+Persistent message history stored in MongoDB
+
+Old messages visible when users join later
+
+📱 UI & Experience
+
+Responsive design
+
+Clean room-based sidebar layout
+
+Room info panel showing members and invite codes
+
+Admin indicators for room creators
+
+🛠️ Tech Stack
 Frontend
 
-React.js
+React
 
-Axios
-
-Socket.IO Client
-
-React Router DOM
+CSS
 
 Backend
 
@@ -40,34 +67,36 @@ Node.js
 
 Express.js
 
-MongoDB (Mongoose)
+Database
 
-Socket.IO
+MongoDB
 
-JWT Authentication
+Mongoose
 
-⚙️ Project Structure
-realtime-chat-app/
-├── client/        # React frontend
-├── server/        # Node.js backend
-└── README.md
+Real-Time
 
-🔧 Setup Instructions (Run Locally)
+Socket.IO (WebSockets)
+
+Authentication
+
+JWT (JSON Web Tokens)
+
+BCrypt for password hashing
+
+⚙️ Installation & Setup
 Prerequisites
 
-Node.js (v18+ recommended)
+Node.js
 
-MongoDB (running locally)
-
-npm
+MongoDB (Local or MongoDB Atlas)
 
 Backend Setup
 cd server
 npm install
-npm run dev
+npm start
 
 
-Backend runs on:
+Server runs at:
 
 http://localhost:5000
 
@@ -77,69 +106,84 @@ npm install
 npm start
 
 
-Frontend runs on:
+App runs at:
 
 http://localhost:3000
 
-🔐 Authentication Flow
+Environment Variables (.env)
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
 
-User registers with email and password
+📂 Project Structure
+├── client
+│   ├── src
+│   │   ├── components
+│   │   ├── pages
+│   │   ├── services
+│   │   └── App.js
+│   └── package.json
+│
+├── server
+│   ├── models
+│   ├── routes
+│   ├── middleware
+│   ├── socket.js
+│   └── index.js
+│
+├── screenshots
+├── .env.example
+└── README.md
 
-Password is hashed and stored securely
+🟢 Project Screenshots
 
-On login, a JWT token is generated
+Login / Register Screen
 
-Token is stored on the client and sent with API requests
+Chat Dashboard with Rooms
 
-Protected routes validate the token before access
+Public Room Chat
 
-🔄 Real-Time Communication Flow
+Private Room with Invite Code
 
-Client establishes a WebSocket connection using Socket.IO
+Media Message Preview
 
-User joins a chat room
+Room Info Modal
 
-Messages are sent through WebSockets
+🖥️ Screenshots / Demo
+🔐 Login / Register
+<p align="center"> <img src="screenshots/Screenshot%202025-12-31%20200216.png" width="800" /> </p>
+🌍 Public Room Chat (Multiple Users)
+<p align="center"> <img src="screenshots/Screenshot%202025-12-31%20192544.png" width="800" /> </p>
+🔒 Private Room with Invite Code
+<p align="center"> <img src="screenshots/Screenshot%202025-12-31%20200044.png" width="800" /> </p>
+🎥 Video Call Screen
+<p align="center"> <img src="screenshots/Screenshot%202025-12-31%20202237.png" width="800" /> </p>
+👥 Room Info (Members & Invite Code)
+<p align="center"> <img src="screenshots/Screenshot%202025-12-31%20200132.png" width="800" /> </p>
 
-Messages are stored in MongoDB
+🛠️ Planned Enhancements
 
-Stored messages are fetched on page refresh to maintain chat history
+The following features were planned but not completed due to time constraints:
 
-🖼 Screenshots
+Unread message indicators (blue-dot notifications)
 
-(Add screenshots here in the email submission)
+Incoming audio/video call notifications
 
-Login Page
+Accept / reject call UI
 
-Register Page
+Call history and missed call indicators
 
-Chat Room
+These enhancements can be added using additional Socket.IO events and WebRTC.
 
-Message persistence after refresh
+📌 Key Notes
 
-✅ How This Meets the Assignment Requirements
+Focused on real-time architecture and scalability
 
-Real-time communication → Socket.IO
-WebSockets → Implemented on both client & server
+Prioritized core functionality over UI polish
 
-Message persistence → MongoDB
+Designed to be easily extensible for future features
 
-Authentication → JWT-based
+👤 Author
 
-Responsive UI → React
-
-Real-world relevance → Similar to Slack / WhatsApp
-
-📬 Submission Notes
-
-Project runs locally without deployment
-
-All requirements implemented as per assignment
-
-Screenshots included in submission email
-
-README contains setup and explanation details
-
-🔚 Final Note
-
-This project demonstrates a practical implementation of real-time systems, backend integration, and secure authentication using the MERN stack.
+Pujitha Mule
+Aspiring Full-Stack Developer (MERN)
+Real-Time Systems • WebSockets • Scalable Application Design

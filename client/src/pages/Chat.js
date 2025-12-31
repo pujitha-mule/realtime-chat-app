@@ -5,8 +5,9 @@ import RoomList from "../components/RoomList";
 import socket from "../services/socket";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Dropdown, Modal, Button, FormControl, ListGroup, Badge, Form } from "react-bootstrap";
+import { toast } from 'react-toastify';
 
-/* --- Video Call Component (Preserved) --- */
+/* --- Video Call Component (Preserved & Integrated) --- */
 const VideoCallOverlay = ({ currentRoom, user, type, onEnd }) => {
   const jitsiContainerRef = useRef(null);
   const jitsiApiRef = useRef(null);
@@ -59,7 +60,7 @@ export default function Chat({ setAuth }) {
   
   // --- UNREAD MESSAGES & CALL SIGNALING STATE ---
   const [unreadRooms, setUnreadRooms] = useState([]);
-  const [incomingCall, setIncomingCall] = useState(null); // { callerName, type, roomId }
+  const [incomingCall, setIncomingCall] = useState(null); 
   const currentRoomRef = useRef(null);
 
   const [newRoomData, setNewRoomData] = useState({
@@ -115,22 +116,30 @@ export default function Chat({ setAuth }) {
       setCurrentRoom((prev) => (prev?._id === roomId ? null : prev));
     });
 
-    // LISTEN FOR CALLS (GLOBAL)
+    // --- INTEGRATED CALL SIGNALING ---
     socket.on("incoming_call", (data) => {
-      // Show modal only if it's not our own call
-      setIncomingCall(data);
+      setIncomingCall(data); 
+      toast.info(`📞 Incoming ${data.type} call from ${data.callerName}`, { autoClose: false });
     });
 
+    socket.on("call_ended_signal", () => {
+      setCallConfig({ active: false });
+      setIncomingCall(null);
+      toast.dismiss();
+    });
+
+    // Support for the old "call_ended" event as well
     socket.on("call_ended", () => {
       setCallConfig({ active: false });
       setIncomingCall(null);
+      toast.dismiss();
     });
 
     return () => {
       socket.off("room_deleted");
       socket.off("incoming_call");
       socket.off("call_ended");
-      socket.disconnect();
+      socket.off("call_ended_signal");
     };
   }, [fetchData, handleLogout]);
 
@@ -142,47 +151,36 @@ export default function Chat({ setAuth }) {
     }
   }, [location.state]);
 
-  // --- 4. Room-Specific Messages & Sockets & Unread Logic ---
+  // --- 4. Room-Specific Messages & Unread Logic ---
   useEffect(() => {
     if (!user) return;
     currentRoomRef.current = currentRoom?._id;
 
-    if (!currentRoom) {
-        const handleGlobalReceive = (msg) => {
-            const incomingRoomId = msg.roomId || msg.room;
-            const senderId = msg.sender?._id || msg.sender;
-            if (senderId !== user._id) {
-                setUnreadRooms(prev => !prev.includes(incomingRoomId) ? [...prev, incomingRoomId] : prev);
-            }
-        };
-        socket.on("receive_message", handleGlobalReceive);
-        return () => socket.off("receive_message", handleGlobalReceive);
-    }
-
-    const roomId = currentRoom._id;
-    setUnreadRooms(prev => prev.filter(id => id !== roomId));
-
-    socket.emit("join_room", { roomId, username: user.username });
-
-    api.get(`/messages/${roomId}`)
-      .then((res) => setMessages(res.data))
-      .catch((err) => console.error(err));
-
     const handleReceive = (msg) => {
       const incomingRoomId = msg.roomId || msg.room;
       const senderId = msg.sender?._id || msg.sender;
+      const senderName = msg.sender?.username || "User";
 
       if (incomingRoomId === currentRoomRef.current) {
         setMessages((prev) => [...prev, msg]);
       } else if (senderId !== user._id) {
         setUnreadRooms((prev) => !prev.includes(incomingRoomId) ? [...prev, incomingRoomId] : prev);
+        toast.info(`💬 ${senderName}: ${msg.content || "Sent a file"}`);
       }
     };
 
     socket.on("receive_message", handleReceive);
-    socket.on("message_deleted", ({ messageId }) => {
-      setMessages((prev) => prev.filter((m) => m._id !== messageId));
-    });
+    
+    if (currentRoom) {
+      const roomId = currentRoom._id;
+      setUnreadRooms(prev => prev.filter(id => id !== roomId));
+      socket.emit("join_room", { roomId, username: user.username });
+      api.get(`/messages/${roomId}`).then((res) => setMessages(res.data));
+      
+      socket.on("message_deleted", ({ messageId }) => {
+        setMessages((prev) => prev.filter((m) => m._id !== messageId));
+      });
+    }
 
     return () => {
       socket.off("receive_message", handleReceive);
@@ -192,7 +190,7 @@ export default function Chat({ setAuth }) {
 
   /* ================= CALL HANDLERS ================= */
 
-  const startCall = (type) => {
+  const initiateCall = (type) => {
     if (!currentRoom) return;
     const callData = {
       roomId: currentRoom._id,
@@ -205,14 +203,14 @@ export default function Chat({ setAuth }) {
     setCallConfig({ active: true, type: type });
   };
 
-  const joinCall = () => {
-    // Find the room in our room list based on the incoming call
+  const acceptCall = () => {
     const roomToJoin = rooms.find(r => r._id === incomingCall.roomId);
     if (roomToJoin) {
       setCurrentRoom(roomToJoin);
       setCallConfig({ active: true, type: incomingCall.type });
     }
     setIncomingCall(null);
+    toast.dismiss();
   };
 
   const endCall = () => {
@@ -346,18 +344,18 @@ export default function Chat({ setAuth }) {
   return (
     <div className="container-fluid p-0 bg-light" style={{ height: "100vh" }}>
       
-      {/* INCOMING CALL MODAL */}
-      <Modal show={!!incomingCall} centered backdrop="static">
-        <Modal.Body className="text-center p-4">
-          <div className="display-4 mb-3">{incomingCall?.type === 'video' ? '📹' : '📞'}</div>
-          <h5>Incoming Call</h5>
-          <p>{incomingCall?.callerName} is calling in <strong>{incomingCall?.roomName}</strong></p>
-          <div className="d-flex gap-2 justify-content-center">
-            <Button variant="success" onClick={joinCall}>Join</Button>
-            <Button variant="danger" onClick={() => setIncomingCall(null)}>Ignore</Button>
+      {/* 2. INCOMING CALL OVERLAY (As requested) */}
+      {incomingCall && (
+        <div className="incoming-overlay text-center p-4 bg-white shadow fixed-top mt-5 mx-auto border rounded" style={{width: '300px', zIndex: 3000}}>
+          <div className="mb-2" style={{fontSize: '2rem'}}>{incomingCall.type === 'video' ? '📹' : '📞'}</div>
+          <h5>{incomingCall.callerName} is calling...</h5>
+          <p className="small text-muted">In room: {incomingCall.roomName}</p>
+          <div className="d-flex justify-content-center gap-2">
+            <button className="btn btn-success" onClick={acceptCall}>Accept</button>
+            <button className="btn btn-danger" onClick={() => { setIncomingCall(null); toast.dismiss(); }}>Decline</button>
           </div>
-        </Modal.Body>
-      </Modal>
+        </div>
+      )}
 
       <div className="d-flex h-100 overflow-hidden">
         <RoomList
@@ -376,6 +374,7 @@ export default function Chat({ setAuth }) {
         />
 
         <div className="flex-grow-1 bg-white d-flex flex-column position-relative">
+          {/* 3. THE VIDEO CALL SCREEN */}
           {callConfig.active && (
             <VideoCallOverlay currentRoom={currentRoom} user={user} type={callConfig.type} onEnd={endCall} />
           )}
@@ -408,8 +407,9 @@ export default function Chat({ setAuth }) {
                 </div>
                 <div className="d-flex align-items-center gap-3">
                   <span className="text-secondary" style={{ cursor: "pointer", fontSize: "1.3rem" }} onClick={() => setShowSearchBar(!showSearchBar)}>🔍</span>
-                  <span className="text-secondary" style={{ cursor: "pointer", fontSize: "1.3rem" }} onClick={() => startCall('video')}>📹</span>
-                  <span className="text-secondary" style={{ cursor: "pointer", fontSize: "1.3rem" }} onClick={() => startCall('audio')}>📞</span>
+                  {/* 1. CALL BUTTONS IN HEADER */}
+                  <span className="text-secondary" style={{ cursor: "pointer", fontSize: "1.3rem" }} onClick={() => initiateCall('video')}>📹</span>
+                  <span className="text-secondary" style={{ cursor: "pointer", fontSize: "1.3rem" }} onClick={() => initiateCall('audio')}>📞</span>
                   <Dropdown align="end">
                     <Dropdown.Toggle variant="link" className="text-secondary p-0 border-0 no-caret shadow-none"><span style={{ fontSize: "1.6rem" }}>⋮</span></Dropdown.Toggle>
                     <Dropdown.Menu>

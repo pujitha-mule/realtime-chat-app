@@ -8,7 +8,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
 
-// Import Room model for the index fix
+// Import Room model
 import Room from "./models/Room.js";
 
 // Import Routes
@@ -35,23 +35,18 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser()); 
 
-// 2. SERVE STATIC FILES
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// --- 3. MONGODB CONNECTION & INDEX FIX ---
+// --- 3. MONGODB CONNECTION ---
 mongoose.connect(process.env.MONGO_URI)
   .then(async () => {
     console.log("✅ MongoDB Connected Successfully");
-
-    // --- FIX: Drop old index to allow 'sparse: true' to work ---
     try {
       await Room.collection.dropIndex("inviteCode_1");
       console.log("✨ Room Index Fix: Old inviteCode index dropped.");
     } catch (e) {
-      // This will run if the index is already dropped or doesn't exist
       console.log("ℹ️ Room Index Fix: No cleanup needed.");
     }
-    // ---------------------------------------------------------
   })
   .catch((err) => console.error("❌ MongoDB CONNECTION ERROR:", err.message));
 
@@ -66,8 +61,6 @@ const io = new Server(server, {
 });
 
 app.set("socketio", io);
-
-
 
 io.on("connection", (socket) => {
   console.log(`📡 User Connected: ${socket.id}`);
@@ -88,9 +81,25 @@ io.on("connection", (socket) => {
       type: "text",
       createdAt: new Date()
     });
-
-    socket.to(roomId).emit("user_joined_notify", `${username} joined the chat`);
   });
+
+  // --- 🎥 AUDIO & VIDEO CALL EVENTS ---
+  
+  // 1. Account A starts a call
+  socket.on("start_call", (data) => {
+    // data: { roomId, callerName, type: 'video'|'audio' }
+    console.log(`📞 Call initiated in ${data.roomId} by ${data.callerName}`);
+    socket.to(data.roomId).emit("incoming_call", data);
+  });
+
+  // 2. Account B accepts or A cancels
+  socket.on("end_call", (data) => {
+    // data: { roomId }
+    console.log(`🚫 Call ended in ${data.roomId}`);
+    socket.to(data.roomId).emit("call_ended_signal");
+  });
+
+  // --- 💬 MESSAGE & TYPING ---
 
   socket.on("send_message", (data) => {
     io.to(data.roomId).emit("receive_message", data);
@@ -103,7 +112,6 @@ io.on("connection", (socket) => {
   socket.on("stop_typing", (data) => {
     const roomId = typeof data === 'string' ? data : data.roomId;
     socket.to(roomId).emit("user_stop_typing");
-    socket.to(roomId).emit("user_stopped"); 
   });
 
   socket.on("disconnect", () => {
@@ -116,6 +124,5 @@ app.use("/api/auth", authRoutes);
 app.use("/api/rooms", roomRoutes);
 app.use("/api/messages", messageRoutes);
 
-// --- 6. LISTEN ---
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

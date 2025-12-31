@@ -1,11 +1,16 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+
+// Toastify Imports
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Chat from "./pages/Chat";
-import JoinRoom from "./pages/JoinRoom"; // 1. Import your JoinRoom page
+import JoinRoom from "./pages/JoinRoom";
 
 function App() {
   const [auth, setAuth] = useState(() => {
@@ -75,7 +80,6 @@ function App() {
             element={isAuthenticated ? <Chat setAuth={handleSetAuth} auth={auth} /> : <Navigate to="/login" replace />}
           />
 
-          {/* 2. ADDED JOIN ROOM ROUTE */}
           <Route
             path="/join"
             element={isAuthenticated ? <JoinRoom /> : <Navigate to="/login" replace />}
@@ -87,22 +91,24 @@ function App() {
             element={<Navigate to={isAuthenticated ? "/chat" : "/login"} replace />}
           />
         </Routes>
+
+        {/* --- GLOBAL TOAST CONTAINER --- */}
+        {/* Set to top-center as requested */}
+        <ToastContainer 
+          position="top-center" 
+          autoClose={4000} 
+          hideProgressBar={false} 
+          newestOnTop={false} 
+          closeOnClick 
+          rtl={false} 
+          pauseOnFocusLoss 
+          draggable 
+          pauseOnHover 
+          theme="colored" 
+        />
       </div>
     </Router>
   );
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
