@@ -122,9 +122,8 @@ JWT_SECRET=your_secret_key
 
 🔐 Login / Register
 <p align="center">
-  <img src="Screenshots/Screenshot%202025-12-31%20210255.png" width="800"/>
-</p> 
-
+  <img src="screenshots/Screenshot%202025-12-31%20210255.png" width="800"/>
+</p>
 
 🌍 Public Room Chat (Multiple Users)
 <p align="center">
@@ -133,7 +132,7 @@ JWT_SECRET=your_secret_key
 
 🔒 Private Room with Invite Code
 <p align="center">
-  <img src="screenshots/Screenshot%202025-12-31%20200044.png" width="800"/>
+  <img src="screenshots/Screenshot%202025-12-31%20195710.png" width="800"/>
 </p>
 
 🎥 Video Call Screen
