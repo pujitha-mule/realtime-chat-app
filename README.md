@@ -83,7 +83,7 @@ The project focuses on real-time communication, room-based collaboration, authen
 
 ---
 
-### Backend Setup
+## Backend Setup
 ```bash
 cd server
 npm install
