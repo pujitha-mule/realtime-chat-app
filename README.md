@@ -5,113 +5,98 @@
 
 ## 📌 Overview
 
-A full-stack real-time chat application built using the **MERN stack (MongoDB, Express.js, React, Node.js)** and **Socket.IO**.  
-The project focuses on real-time communication, room-based collaboration, authentication, and persistent chat history, inspired by platforms like **Slack** and **WhatsApp**.
+A full-stack real-time chat application built using the MERN stack (MongoDB, Express.js, React, Node.js) and Socket.IO.
+The project focuses on real-time communication, room-based collaboration, authentication, and persistent chat history, inspired by platforms like Slack and WhatsApp.
 
 ---
 
 ## 🚀 Features
 
 ### 🔐 Authentication & Security
-- JWT-based user authentication  
-- Secure login and logout flow  
-- Protected routes for authenticated users  
-
----
+- JWT-based user authentication
+- Secure login and logout flow
+- Protected routes for authenticated users
 
 ### 🏠 Room & Chat Management
-- Public chat rooms (joinable by all users)  
-- Private chat rooms with **6-character invite codes**  
-- Create public or private rooms  
-- Role-based room ownership (admin/member)  
-- Direct messaging between users  
-
----
+- Public chat rooms (joinable by all users)
+- Private chat rooms with 6-character invite codes
+- Create public or private rooms
+- Role-based room ownership (admin/member)
+- Direct messaging between users
 
 ### 💬 Real-Time Communication
-- Real-time messaging using **Socket.IO**  
-- System messages (e.g., *“User joined the room”*)  
-- Multi-user chat support  
-- Live room updates without page refresh  
-
----
+- Real-time messaging using Socket.IO
+- System messages (e.g., “User joined the room”)
+- Multi-user chat support
+- Live room updates without page refresh
 
 ### 📨 Messaging & Media
-- Text messaging  
-- Image and file sharing  
-- Persistent message history stored in MongoDB  
-- Old messages visible when users join later  
-
----
+- Text messaging
+- Image and file sharing
+- Persistent message history stored in MongoDB
+- Old messages visible when users join later
 
 ### 📱 UI & Experience
-- Responsive design  
-- Clean room-based sidebar layout  
-- Room info panel showing members and invite codes  
-- Admin indicators for room creators  
+- Responsive design
+- Clean room-based sidebar layout
+- Room info panel showing members and invite codes
+- Admin indicators for room creators
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Frontend
-- React  
-- CSS  
+Frontend
+- React
+- CSS
 
-### Backend
-- Node.js  
-- Express.js  
+Backend
+- Node.js
+- Express.js
 
-### Database
-- MongoDB  
-- Mongoose  
+Database
+- MongoDB
+- Mongoose
 
-### Real-Time
-- Socket.IO (WebSockets)  
+Real-Time
+- Socket.IO (WebSockets)
 
-### Authentication
-- JWT (JSON Web Tokens)  
-- BCrypt for password hashing  
+Authentication
+- JWT (JSON Web Tokens)
+- BCrypt for password hashing
 
 ---
 
 ## ⚙️ Installation & Setup
 
-### Prerequisites
-- Node.js  
-- MongoDB (Local or MongoDB Atlas)  
+Prerequisites
+- Node.js
+- MongoDB (Local or MongoDB Atlas)
 
----
-
-### Backend Setup
-```bash
+Backend Setup
 cd server
 npm install
 npm start
-Server runs at:
 
-arduino
-Copy code
+Server runs at:
 http://localhost:5000
+
 Frontend Setup
-bash
-Copy code
 cd client
 npm install
 npm start
-App runs at:
 
-arduino
-Copy code
+App runs at:
 http://localhost:3000
+
 Environment Variables (.env)
-env
-Copy code
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
-📂 Project Structure
-pgsql
-Copy code
+
+---
+
+## 📂 Project Structure
+
 ├── client
 │   ├── src
 │   │   ├── components
@@ -130,56 +115,59 @@ Copy code
 ├── screenshots
 ├── .env.example
 └── README.md
-🖥️ Screenshots / Demo
+
+---
+
+## 🖥️ Screenshots / Demo
+
 🔐 Login / Register
-<p align="center"> <img src="screenshots/Screenshot%202025-12-31%20200216.png" width="800" /> </p>
+<p align="center">
+  <img src="screenshots/Screenshot%202025-12-31%20200216.png" width="800"/>
+</p>
+
 🌍 Public Room Chat (Multiple Users)
-<p align="center"> <img src="screenshots/Screenshot%202025-12-31%20192544.png" width="800" /> </p>
+<p align="center">
+  <img src="screenshots/Screenshot%202025-12-31%20192544.png" width="800"/>
+</p>
+
 🔒 Private Room with Invite Code
-<p align="center"> <img src="screenshots/Screenshot%202025-12-31%20200044.png" width="800" /> </p>
+<p align="center">
+  <img src="screenshots/Screenshot%202025-12-31%20200044.png" width="800"/>
+</p>
+
 🎥 Video Call Screen
-<p align="center"> <img src="screenshots/Screenshot%202025-12-31%20202237.png" width="800" /> </p>
+<p align="center">
+  <img src="screenshots/Screenshot%202025-12-31%20202237.png" width="800"/>
+</p>
+
 👥 Room Info (Members & Invite Code)
-<p align="center"> <img src="screenshots/Screenshot%202025-12-31%20200132.png" width="800" /> </p>
-🛠️ Planned Enhancements
-The following features were planned but not completed due to time constraints:
+<p align="center">
+  <img src="screenshots/Screenshot%202025-12-31%20200132.png" width="800"/>
+</p>
 
-Unread message indicators (blue-dot notifications)
+---
 
-Incoming audio/video call notifications
+## 🛠️ Planned Enhancements
 
-Accept / reject call UI
-
-Call history and missed call indicators
+- Unread message indicators (blue-dot notifications)
+- Incoming audio/video call notifications
+- Accept / reject call UI
+- Call history and missed call indicators
 
 These enhancements can be added using additional Socket.IO events and WebRTC.
 
-📌 Key Notes
-Focused on real-time architecture and scalability
+---
 
-Prioritized core functionality over UI polish
+## 📌 Key Notes
 
-Designed to be easily extensible for future features
+- Focused on real-time architecture and scalability
+- Prioritized core functionality over UI polish
+- Designed to be easily extensible for future features
 
-👤 Author
-Pujitha Mule
-Aspiring Full-Stack Developer (MERN)
+---
+
+## 👤 Author
+
+Pujitha Mule  
+Aspiring Full-Stack Developer (MERN)  
 Real-Time Systems • WebSockets • Scalable Application Design
-
-markdown
-Copy code
-
-### Final instruction (important):
-- Paste  
-- Save  
-- Push  
-- Submit  
-
-Do **not** touch the README again.  
-You’re done.
-
-If you want next:
-- a **2-minute interview explanation**
-- or **“what I’d improve if given more time” answer**
-
-Just say the word.
