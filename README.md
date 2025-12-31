@@ -97,24 +97,23 @@ JWT_SECRET=your_secret_key
 
 ## 📂 Project Structure
 
-├── client
-│   ├── src
-│   │   ├── components
-│   │   ├── pages
-│   │   ├── services
-│   │   └── App.js
-│   └── package.json
-│
-├── server
-│   ├── models
-│   ├── routes
-│   ├── middleware
-│   ├── socket.js
-│   └── index.js
-│
-├── screenshots
-├── .env.example
-└── README.md
+root/
+├── client/              # Frontend (React + Bootstrap)
+│   ├── src/
+│   │   ├── components/  # Reusable UI pieces (Buttons, Navbars)
+│   │   ├── pages/       # Full views (Home, Login, Dashboard)
+│   │   ├── services/    # API calls to your Express backend
+│   │   └── App.js       # Main React entry point
+│   └── package.json     # Frontend dependencies
+├── server/              # Backend (Node + Express)
+│   ├── models/          # MongoDB Schemas (Data structure)
+│   ├── routes/          # API Endpoints (GET, POST, etc.)
+│   ├── middleware/      # Auth checks or logging
+│   ├── socket.js        # Real-time logic (WebSockets)
+│   └── index.js         # Server entry point
+├── screenshots/         # Documentation images
+├── .env.example         # Template for environment variables
+└── README.md            # Project instructions
 
 ---
 
