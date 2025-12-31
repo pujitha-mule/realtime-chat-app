@@ -74,6 +74,7 @@ Prerequisites
 - MongoDB (Local or MongoDB Atlas)
 
 Backend Setup
+```bash
 -cd server
 -npm install
 -npm start
