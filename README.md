@@ -122,7 +122,7 @@ JWT_SECRET=your_secret_key
 
 🔐 Login / Register
 <p align="center">
-  <img src="Screenshots\Screenshot 2025-12-31 210255.png" width="800"/>
+  <img src="Screenshots/Screenshot 2025-12-31 210255.png" width="800"/>
 </p> 
 
 
