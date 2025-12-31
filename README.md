@@ -74,18 +74,17 @@ Prerequisites
 - MongoDB (Local or MongoDB Atlas)
 
 Backend Setup
-```bash
--cd server
--npm install
--npm start
+- cd server
+- npm install
+- npm start
 
 Server runs at:
--http://localhost:5000
+- http://localhost:5000
 
 Frontend Setup
--cd client
--npm install
--npm start
+- cd client
+- npm install
+- npm start
 
 App runs at:
 -http://localhost:3000
