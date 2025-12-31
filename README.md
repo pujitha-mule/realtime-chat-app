@@ -83,34 +83,35 @@ The project focuses on real-time communication, room-based collaboration, authen
 
 ---
 
-## Backend Setup
+### Backend Setup
 ```bash
 cd server
 npm install
 npm start
+Server runs at:
 
-### server runs at
-```bash
+arduino
+Copy code
 http://localhost:5000
-
-###Frontend Setup
-```bash
+Frontend Setup
+bash
+Copy code
 cd client
 npm install
 npm start
+App runs at:
 
-###App runs at:
-```bash
+arduino
+Copy code
 http://localhost:3000
-
-###Environment Variables (.env)
-```bash
+Environment Variables (.env)
+env
+Copy code
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
-
-###
 📂 Project Structure
-```bash
+pgsql
+Copy code
 ├── client
 │   ├── src
 │   │   ├── components
@@ -128,11 +129,8 @@ JWT_SECRET=your_secret_key
 │
 ├── screenshots
 ├── .env.example
-└── README.me
-
-----
-
-##🖥️ Screenshots / Demo
+└── README.md
+🖥️ Screenshots / Demo
 🔐 Login / Register
 <p align="center"> <img src="screenshots/Screenshot%202025-12-31%20200216.png" width="800" /> </p>
 🌍 Public Room Chat (Multiple Users)
@@ -143,38 +141,42 @@ JWT_SECRET=your_secret_key
 <p align="center"> <img src="screenshots/Screenshot%202025-12-31%20202237.png" width="800" /> </p>
 👥 Room Info (Members & Invite Code)
 <p align="center"> <img src="screenshots/Screenshot%202025-12-31%20200132.png" width="800" /> </p>
-
-###Planned Enhancements
+🛠️ Planned Enhancements
 The following features were planned but not completed due to time constraints:
-- Unread message indicators (blue-dot notifications)
-- Incoming audio/video call notifications
-- Accept / reject call UI
-- Call history and missed call indicators
+
+Unread message indicators (blue-dot notifications)
+
+Incoming audio/video call notifications
+
+Accept / reject call UI
+
+Call history and missed call indicators
+
 These enhancements can be added using additional Socket.IO events and WebRTC.
 
-##📌 Key Notes
-- Focused on real-time architecture and scalability
-- Prioritized core functionality over UI polish
-- Designed to be easily extensible for future features
+📌 Key Notes
+Focused on real-time architecture and scalability
 
-##👤 Author
-**Pujitha Mule**
--Aspiring Full-Stack Developer (MERN)
-- Real-Time Systems • WebSockets • Scalable Application Design
+Prioritized core functionality over UI polish
 
+Designed to be easily extensible for future features
 
----
+👤 Author
+Pujitha Mule
+Aspiring Full-Stack Developer (MERN)
+Real-Time Systems • WebSockets • Scalable Application Design
 
-## ✅ Final verdict (honest)
+markdown
+Copy code
 
-- This README is **clean, professional, and recruiter-safe**
-- No overclaiming
-- Clear structure
-- Strong for **6–7 LPA** evaluation
-- Matches what your project actually does
+### Final instruction (important):
+- Paste  
+- Save  
+- Push  
+- Submit  
 
-👉 **Do NOT touch it further.**  
-Submit the GitHub link confidently.
+Do **not** touch the README again.  
+You’re done.
 
 If you want next:
 - a **2-minute interview explanation**
