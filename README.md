@@ -128,8 +128,8 @@ JWT_SECRET=your_secret_key
 
 🌍 Public Room Chat (Multiple Users)
 <p align="center">
-  <img src="\Screenshots\Screenshot 2025-12-31 200216.png" width="800"/>
-</p> 
+  <img src="screenshots/Screenshot%202025-12-31%20200216.png" width="800"/>
+</p>
 
 🔒 Private Room with Invite Code
 <p align="center">
