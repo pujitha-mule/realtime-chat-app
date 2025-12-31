@@ -132,7 +132,7 @@ JWT_SECRET=your_secret_key
 
 ----
 
-###🖥️ Screenshots / Demo
+##🖥️ Screenshots / Demo
 🔐 Login / Register
 <p align="center"> <img src="screenshots/Screenshot%202025-12-31%20200216.png" width="800" /> </p>
 🌍 Public Room Chat (Multiple Users)
@@ -152,12 +152,12 @@ The following features were planned but not completed due to time constraints:
 - Call history and missed call indicators
 These enhancements can be added using additional Socket.IO events and WebRTC.
 
-###📌 Key Notes
+##📌 Key Notes
 - Focused on real-time architecture and scalability
 - Prioritized core functionality over UI polish
 - Designed to be easily extensible for future features
 
-###👤 Author
+##👤 Author
 **Pujitha Mule**
 -Aspiring Full-Stack Developer (MERN)
 - Real-Time Systems • WebSockets • Scalable Application Design
