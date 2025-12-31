@@ -5,12 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Chat from "./pages/Chat";
+import JoinRoom from "./pages/JoinRoom"; // 1. Import your JoinRoom page
 
 function App() {
   const [auth, setAuth] = useState(() => {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
-    // Only set auth if both exist and user is valid JSON
     try {
       return token && user ? { token, user: JSON.parse(user) } : null;
     } catch (e) {
@@ -18,7 +18,6 @@ function App() {
     }
   });
 
-  // Sync state if localStorage changes (prevents session desync)
   useEffect(() => {
     const syncAuth = () => {
       const token = localStorage.getItem("token");
@@ -52,7 +51,6 @@ function App() {
   const isAuthenticated = Boolean(auth);
 
   return (
-    /* Added Future Flags to remove React Router v7 transition warnings */
     <Router 
       future={{ 
         v7_startTransition: true, 
@@ -64,36 +62,23 @@ function App() {
           {/* PUBLIC ROUTES */}
           <Route
             path="/login"
-            element={
-              !isAuthenticated ? (
-                <Login setAuth={handleSetAuth} />
-              ) : (
-                <Navigate to="/chat" replace />
-              )
-            }
+            element={!isAuthenticated ? <Login setAuth={handleSetAuth} /> : <Navigate to="/chat" replace />}
           />
-
           <Route
             path="/register"
-            element={
-              !isAuthenticated ? (
-                <Register />
-              ) : (
-                <Navigate to="/chat" replace />
-              )
-            }
+            element={!isAuthenticated ? <Register /> : <Navigate to="/chat" replace />}
           />
 
           {/* PROTECTED ROUTES */}
           <Route
             path="/chat"
-            element={
-              isAuthenticated ? (
-                <Chat setAuth={handleSetAuth} auth={auth} />
-              ) : (
-                <Navigate to="/login" replace />
-              )
-            }
+            element={isAuthenticated ? <Chat setAuth={handleSetAuth} auth={auth} /> : <Navigate to="/login" replace />}
+          />
+
+          {/* 2. ADDED JOIN ROOM ROUTE */}
+          <Route
+            path="/join"
+            element={isAuthenticated ? <JoinRoom /> : <Navigate to="/login" replace />}
           />
 
           {/* FALLBACK */}
@@ -108,3 +93,16 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+

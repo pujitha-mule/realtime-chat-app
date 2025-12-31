@@ -27,7 +27,8 @@ const auth = async (req, res, next) => {
     );
 
     // 5️⃣ Fetch user from MongoDB
-    // We select -password for security and .lean() for performance
+    // Removed .lean() to ensure req.user is a full Mongoose document 
+    // so that req.user._id is always available as an ObjectId.
     const user = await User.findById(decoded.id).select("-password");
     
     if (!user) {
@@ -35,7 +36,8 @@ const auth = async (req, res, next) => {
     }
 
     // 6️⃣ Attach user to request
-    // We explicitly add .id as a string to make it easy for logic like: req.user.id === room.owner
+    // req.user will be the Mongoose document
+    // req.user.id will be the string version for easy comparison
     req.user = user;
     req.user.id = user._id.toString(); 
 

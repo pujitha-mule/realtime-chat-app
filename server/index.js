@@ -8,6 +8,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
 
+// Import Room model for the index fix
+import Room from "./models/Room.js";
+
 // Import Routes
 import roomRoutes from "./routes/roomRoutes.js"; 
 import authRoutes from "./routes/authRoutes.js"; 
@@ -35,9 +38,21 @@ app.use(cookieParser());
 // 2. SERVE STATIC FILES
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// --- 3. MONGODB CONNECTION ---
+// --- 3. MONGODB CONNECTION & INDEX FIX ---
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected Successfully"))
+  .then(async () => {
+    console.log("✅ MongoDB Connected Successfully");
+
+    // --- FIX: Drop old index to allow 'sparse: true' to work ---
+    try {
+      await Room.collection.dropIndex("inviteCode_1");
+      console.log("✨ Room Index Fix: Old inviteCode index dropped.");
+    } catch (e) {
+      // This will run if the index is already dropped or doesn't exist
+      console.log("ℹ️ Room Index Fix: No cleanup needed.");
+    }
+    // ---------------------------------------------------------
+  })
   .catch((err) => console.error("❌ MongoDB CONNECTION ERROR:", err.message));
 
 // --- 4. SOCKET.IO ---
@@ -57,18 +72,15 @@ app.set("socketio", io);
 io.on("connection", (socket) => {
   console.log(`📡 User Connected: ${socket.id}`);
 
-  // Setup private room for user notifications
   socket.on("setup", (userId) => {
     socket.join(userId);
     console.log(`🔔 User ${userId} joined personal notification room`);
   });
 
-  // --- JOIN ROOM LOGIC ---
   socket.on("join_room", ({ roomId, username }) => {
     socket.join(roomId);
     console.log(`👤 ${username} joined room: ${roomId}`);
     
-    // 1. Existing Message Logic
     socket.to(roomId).emit("receive_message", {
       roomId,
       content: `${username} has joined the room`,
@@ -77,26 +89,21 @@ io.on("connection", (socket) => {
       createdAt: new Date()
     });
 
-    // 2. Your specific requested notification
     socket.to(roomId).emit("user_joined_notify", `${username} joined the chat`);
   });
 
-  // Message Handling
   socket.on("send_message", (data) => {
     io.to(data.roomId).emit("receive_message", data);
   });
 
-  // --- TYPING INDICATORS ---
   socket.on("typing", ({ roomId, username }) => {
-    // Sends to everyone in the room except the sender
     socket.to(roomId).emit("user_typing", { username });
   });
 
   socket.on("stop_typing", (data) => {
-    // Supports both formats: "roomId" or { roomId: "id" }
     const roomId = typeof data === 'string' ? data : data.roomId;
     socket.to(roomId).emit("user_stop_typing");
-    socket.to(roomId).emit("user_stopped"); // Matches your join/typing block
+    socket.to(roomId).emit("user_stopped"); 
   });
 
   socket.on("disconnect", () => {
