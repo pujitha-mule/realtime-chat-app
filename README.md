@@ -122,14 +122,14 @@ JWT_SECRET=your_secret_key
 
 🔐 Login / Register
 <p align="center">
-  <img src="screenshots/Screenshot%202025-12-31%20210255.png" width="800"/>
-</p>
+  <img src="Screenshots\Screenshot 2025-12-31 210255.png" width="800"/>
+</p> 
 
 
 🌍 Public Room Chat (Multiple Users)
 <p align="center">
-  <img src="screenshots/Screenshot%202025-12-31%20192544.png" width="800"/>
-</p>
+  <img src="\Screenshots\Screenshot 2025-12-31 200216.png" width="800"/>
+</p> 
 
 🔒 Private Room with Invite Code
 <p align="center">
