@@ -74,20 +74,20 @@ Prerequisites
 - MongoDB (Local or MongoDB Atlas)
 
 Backend Setup
-cd server
-npm install
-npm start
+-cd server
+-npm install
+-npm start
 
 Server runs at:
-http://localhost:5000
+-http://localhost:5000
 
 Frontend Setup
-cd client
-npm install
-npm start
+-cd client
+-npm install
+-npm start
 
 App runs at:
-http://localhost:3000
+-http://localhost:3000
 
 Environment Variables (.env)
 MONGO_URI=your_mongodb_connection_string
