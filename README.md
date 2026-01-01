@@ -90,9 +90,10 @@ App runs at:
 -http://localhost:3000
 
 Environment Variables (.env)
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-
+-PORT=5000
+-CLIENT_URL=http://localhost:3000
+-MONGO_URI=your_mongodb_connection_string
+-JWT_SECRET=your_secret_key
 ---
 
 ##  Project Structure
