@@ -125,22 +125,22 @@ root/
   <img src="screenshots/Screenshot%202025-12-31%20210255.png" width="800"/>
 </p>
 
-🌍 Public Room Chat (Multiple Users)
+ Public Room Chat (Multiple Users)
 <p align="center">
   <img src="screenshots/Screenshot%202025-12-31%20200216.png" width="800"/>
 </p>
 
-🔒 Private Room with Invite Code
+ Private Room with Invite Code
 <p align="center">
   <img src="screenshots/Screenshot%202025-12-31%20195710.png" width="800"/>
 </p>
 
-🎥 Video Call Screen
+ Video Call Screen
 <p align="center">
   <img src="screenshots/Screenshot%202025-12-31%20202237.png" width="800"/>
 </p>
 
-👥 Room Info (Members & Invite Code)
+ Room Info (Members & Invite Code)
 <p align="center">
   <img src="screenshots/Screenshot%202025-12-31%20200132.png" width="800"/>
 </p>
