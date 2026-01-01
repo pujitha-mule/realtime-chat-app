@@ -1,42 +1,42 @@
-<h1 align="center">🗨️ Real-Time Chat Application</h1>
+<h1 align="center"> Real-Time Chat Application</h1>
 <p align="center"><b>MERN Stack • Socket.IO • JWT Authentication</b></p>
 
 ---
 
-## 📌 Overview
+##  Overview
 
 A full-stack real-time chat application built using the MERN stack (MongoDB, Express.js, React, Node.js) and Socket.IO.
 The project focuses on real-time communication, room-based collaboration, authentication, and persistent chat history, inspired by platforms like Slack and WhatsApp.
 
 ---
 
-## 🚀 Features
+##  Features
 
-### 🔐 Authentication & Security
+###  Authentication & Security
 - JWT-based user authentication
 - Secure login and logout flow
 - Protected routes for authenticated users
 
-### 🏠 Room & Chat Management
+###  Room & Chat Management
 - Public chat rooms (joinable by all users)
 - Private chat rooms with 6-character invite codes
 - Create public or private rooms
 - Role-based room ownership (admin/member)
 - Direct messaging between users
 
-### 💬 Real-Time Communication
+###  Real-Time Communication
 - Real-time messaging using Socket.IO
 - System messages (e.g., “User joined the room”)
 - Multi-user chat support
 - Live room updates without page refresh
 
-### 📨 Messaging & Media
+###  Messaging & Media
 - Text messaging
 - Image and file sharing
 - Persistent message history stored in MongoDB
 - Old messages visible when users join later
 
-### 📱 UI & Experience
+###  UI & Experience
 - Responsive design
 - Clean room-based sidebar layout
 - Room info panel showing members and invite codes
@@ -44,7 +44,7 @@ The project focuses on real-time communication, room-based collaboration, authen
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 Frontend
 - React
@@ -67,7 +67,7 @@ Authentication
 
 ---
 
-## ⚙️ Installation & Setup
+##  Installation & Setup
 
 Prerequisites
 - Node.js
@@ -95,7 +95,7 @@ JWT_SECRET=your_secret_key
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 <pre>
 root/
 ├── client/              # Frontend (React + Bootstrap)
@@ -117,9 +117,9 @@ root/
 </pre>
 ---
 
-## 🖥️ Screenshots / Demo
+##  Screenshots / Demo
 
-🔐 Login / Register
+ Login / Register
 <p align="center">
   <img src="screenshots/Screenshot%202025-12-31%20210255.png" width="800"/>
 </p>
@@ -146,7 +146,7 @@ root/
 
 ---
 
-## 🛠️ Planned Enhancements
+## Planned Enhancements
 
 - Unread message indicators (blue-dot notifications)
 - Incoming audio/video call notifications
@@ -157,7 +157,7 @@ These enhancements can be added using additional Socket.IO events and WebRTC.
 
 ---
 
-## 📌 Key Notes
+##  Key Notes
 
 - Focused on real-time architecture and scalability
 - Prioritized core functionality over UI polish
@@ -165,7 +165,7 @@ These enhancements can be added using additional Socket.IO events and WebRTC.
 
 ---
 
-## 👤 Author
+##  Author
 
 Pujitha Mule  
 Aspiring Full-Stack Developer (MERN)  
