@@ -4,7 +4,6 @@
 ---
 
 ##  Overview
-
 A full-stack real-time chat application built using the MERN stack (MongoDB, Express.js, React, Node.js) and Socket.IO.
 The project focuses on real-time communication, room-based collaboration, authentication, and persistent chat history, inspired by platforms like Slack and WhatsApp.
 
