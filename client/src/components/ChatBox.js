@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 // Add the Dropdown import
 import { Dropdown } from "react-bootstrap"; 
 
-
 function ChatBox({ 
   messages, 
   onSendText, 
