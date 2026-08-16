@@ -29,7 +29,7 @@ The project focuses on real-time communication, room-based collaboration, authen
 - System messages (e.g., “User joined the room”)
 - Multi-user chat support
 - Live room updates without page refresh
-
+  
 ###  Messaging & Media
 - Text messaging
 - Image and file sharing
